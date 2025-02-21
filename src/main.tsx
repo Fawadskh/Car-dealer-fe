@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot } from 'react-dom/client' // <--- exported function
 import './index.css'
-import App from './App.tsx'
-import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query'
+import Banana from './App.tsx' // <--- export default function
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter } from 'react-router-dom'
 
 const store = new QueryClient()
@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={store}>
-        <App />
+        <Banana />
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>,

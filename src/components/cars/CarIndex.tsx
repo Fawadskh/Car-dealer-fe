@@ -51,8 +51,13 @@ const CarIndex = () => {
             headerName: "Price",
             minWidth: 100,
             flex: 1
-        },
-        {
+        }
+    ]
+
+    const token = sessionStorage.getItem("Authorization")
+
+    if(token != null){
+        columns.push({
             field: 'actions',
             headerName: "Actions",
             minWidth:120,
@@ -75,8 +80,8 @@ const CarIndex = () => {
                     </IconButton>
                 </Stack>
             )
-        }
-    ]
+        })
+    }
 
     const getAllCars = async () => {
         const request = await axios.get("http://localhost:8080/api/cars/all")
@@ -86,7 +91,11 @@ const CarIndex = () => {
     }
 
     const deleteCarById = async (id:number) => {
-        const request = axios.delete(`http://localhost:8080/api/cars/${id}`)
+        const request = axios.delete(`http://localhost:8080/api/cars/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem("Authorization")}`
+            }
+        })
         return (await request).status
     }
 
@@ -124,7 +133,9 @@ const CarIndex = () => {
                 <Typography variant="h2">
                     Car Index
                 </Typography>
-                <Link to="/create-car">Create a car</Link>
+                {
+                    token ? <Link to="/create-car">Create a car</Link>: null
+                }
                 <Paper sx={{ height: 500, width: '100%',}}>
                     <DataGrid
                         rows={data}

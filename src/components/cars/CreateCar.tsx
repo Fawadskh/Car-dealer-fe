@@ -40,7 +40,11 @@ const CreateCar = () => {
     const {mutate} = useMutation({
         mutationFn:async (data:Car) => {
             const car:Car = data
-            const request = await axios.post("http://localhost:8080/api/cars/", car)
+            const request = await axios.post("http://localhost:8080/api/cars/", car,{
+                headers:{
+                    "Authorization": `Bearer ${sessionStorage.getItem("Authorization")}`
+                }
+            })
             const response = await request.data
             return response
         },

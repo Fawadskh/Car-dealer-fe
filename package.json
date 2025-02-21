@@ -1,3 +1,4 @@
+
 {
   "name": "car-dealer-fe",
   "private": true,
@@ -6,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "vite:build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

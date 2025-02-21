@@ -42,7 +42,11 @@ const UpdateCar = () => {
     const {mutate} = useMutation({
         mutationFn:async (data:Car) => {
             const car:Car = data
-            const request = await axios.put("http://localhost:8080/api/cars/" + id, car)
+            const request = await axios.put("http://localhost:8080/api/cars/"+id, car,{
+                headers:{
+                    "Authorization": `Bearer ${sessionStorage.getItem("Authorization")}`
+                }
+            })
             const response = await request.data
             return response
         },
